@@ -23,6 +23,10 @@ Route::post('/update/{id}', 'ListController@update');
 
 Route::resource('users', 'ListController@update');
 
+Route::get('/ui', function () {
+    return view('testui');
+});
+
 //Noahs stuff
 
 Route::post('/team/{id}', 'TEAMController@update');
