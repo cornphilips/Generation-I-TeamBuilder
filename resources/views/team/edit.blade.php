@@ -7,6 +7,7 @@
     <div class="form-group row">
       <div class="form-group row">
         {{csrf_field()}}
+        
         <label for="lgFormGroupInput" class="col-sm-2 col-form-label col-form-label-lg">Title</label>
         <div class="col-sm-10">
           <input type="text" class="form-control form-control-lg" id="lgFormGroupInput" value="{{$team->title}}" name="title">

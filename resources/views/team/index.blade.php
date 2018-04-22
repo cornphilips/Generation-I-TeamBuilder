@@ -3,6 +3,8 @@
 @extends('layouts.app')
 @section('content')
   <div class="container">
+    <a href="/team/create" class="btn btn-primary">Create Team</a>
+    
     <table class="table table-striped">
     <thead>
       <tr>
