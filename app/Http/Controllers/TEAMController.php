@@ -48,6 +48,8 @@ class TEAMController extends Controller
         'pokemon6' => $request->get('pokemon6')
       ]);
 
+    
+
       $team->save();
       return redirect('/team');
     }
@@ -72,6 +74,7 @@ class TEAMController extends Controller
     public function edit($id)
     {
       $team = Team::find($id);
+
 
       return view('team.edit', compact('team','id'));
     }
@@ -122,4 +125,10 @@ class TEAMController extends Controller
 
       return redirect('/team');
     }
+
+    public function getTeam($id) {
+      $team = Team::find($id);
+      return view('/testui', compact('team'));
+    }
+
 }

@@ -23,9 +23,11 @@ Route::post('/update/{id}', 'ListController@update');
 
 Route::resource('users', 'ListController@update');
 
-Route::get('/ui', function () {
-    return view('testui');
-});
+//Route::get('/ui', function () {
+//    return view('testui');
+//});
+
+Route::get('/ui/{id}', 'TEAMController@getTeam');
 
 //Noahs stuff
 
