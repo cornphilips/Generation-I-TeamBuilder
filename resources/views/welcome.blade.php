@@ -6,7 +6,7 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-success">
                 <div class="panel-heading">Users CRUD</div>
-                
+
 
                     @if(Auth::check())
                     @if(Auth::User()->isAdmin())

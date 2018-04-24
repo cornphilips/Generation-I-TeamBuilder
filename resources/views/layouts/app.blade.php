@@ -23,6 +23,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+
+
 </head>
 <body>
     <div id="app">
@@ -80,4 +83,13 @@
         </main>
     </div>
 </body>
+
+<script>
+function firstLetterToUpper(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+</script>
+
 </html>
