@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Team;
+use App\User;
 
 class TEAMController extends Controller
 {
@@ -16,8 +18,12 @@ class TEAMController extends Controller
     public function index()
     {
         $teams = Team::all()->toArray();
-
         return view('team.index', compact('teams'));
+
+        //$id = Auth::user()->id;
+        //$teams = Team::all();
+        //$selectedTeam = Auth::user()->id;
+        //return view('team.index', compact('teams', 'selectedTeam'));
     }
 
     /**
@@ -38,7 +44,9 @@ class TEAMController extends Controller
      */
     public function store(Request $request)
     {
+      $id = Auth::user()->id;
       $team = new Team([
+        'user_id' => $id,
         'title' => $request->get('title'),
         'pokemon1' => $request->get('pokemon1'),
         'pokemon2' => $request->get('pokemon2'),
@@ -47,8 +55,6 @@ class TEAMController extends Controller
         'pokemon5' => $request->get('pokemon5'),
         'pokemon6' => $request->get('pokemon6')
       ]);
-
-    
 
       $team->save();
       return redirect('/team');
@@ -128,7 +134,8 @@ class TEAMController extends Controller
 
     public function getTeam($id) {
       $team = Team::find($id);
-      return view('/testui', compact('team'));
+      $teams = Team::all()->toArray();
+      return view('/testui', compact('team' , 'teams'));
     }
 
 }
