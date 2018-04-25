@@ -2,6 +2,47 @@
 
 @section('content')
 
+
+<!--
+NEW STUFF
+-->
+<?php
+ $userid = Auth::user()->id;
+ ?>
+ <div class='container'>
+  <select class="form-control m-bot15 team-chooser" name="team_id">
+    <option class="dropdown"> Choose Team </option>
+    @foreach($teams as $id)
+      @if($id['user_id'] === $userid)
+        <option class="dropdown" value="{{$id['id']}}"> {{$id['title']}} </option>
+      @endif
+    @endforeach
+  </select>
+</div>
+
+<span style="display:none" class="currentTeamID">{{$team['id']}}</span>
+
+<script>
+jQuery(document).ready(function($) {
+    $(".team-chooser").change(function(e) {
+      //location.reload();
+      var id = $(this).val();
+      //alert(id);
+      var currentTeam = $(".currentTeamID").text();
+      //alert(currentTeam);
+      var newUrl = location.href.replace("/ui/"+currentTeam, "/ui/"+id);
+      window.location = newUrl;
+    });
+});
+</script>
+
+<br /><br /><br /><br />
+
+<!--
+NEW STUFF
+-->
+
+
 <?php
 
 $p1 = strtolower($team['pokemon1']);
@@ -18,9 +59,9 @@ $poke4 = DB::select("SELECT * FROM `pokemon` AS p WHERE p.name = '$p4' LIMIT 1",
 $poke5 = DB::select("SELECT * FROM `pokemon` AS p WHERE p.name = '$p5' LIMIT 1", [1]);
 $poke6 = DB::select("SELECT * FROM `pokemon` AS p WHERE p.name = '$p6' LIMIT 1", [1]);
 
-echo '<pre>';
-print_r($poke1);
-echo '</pre>';
+#echo '<pre>';
+#print_r($poke1);
+#echo '</pre>';
 
 
 ?>
@@ -28,7 +69,7 @@ echo '</pre>';
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-1">
-          Team: {{$team->name}}
+          Team: {{$team->title}}
 
 
           <table class="table table-bordered table-hover" id="myTable">
@@ -143,21 +184,21 @@ jQuery(document).ready(function($) {
       //console.log(array[name][0]['attack']);
 
 
-      var normal = '#d8d7c9';
-      var fire = '#FF4136';
-      var water = '#0074D9';
-      var electric = '#FFDC00';
-      var grass = '#2ECC40';
-      var ice = '#7FDBFF';
-      var fighting = '#ef5da4';
-      var poison = '#B10DC9';
-      var ground = '#c4925a';
-      var flying = '#98dce2';
-      var psychic = '#F012BE';
-      var bug = '#c3ef99';
-      var rock = '#e2b17a';
-      var ghost = '#c060db';
-      var dragon = '#9d2ef2';
+      var normal = '#A8A77A';
+      var fire = '#EE8130';
+      var water = '#6390F0';
+      var electric = '#F7D02C';
+      var grass = '#7AC74C';
+      var ice = '#96D9D6';
+      var fighting = '#C22E28';
+      var poison = '#A33EA1';
+      var ground = '#E2BF65';
+      var flying = '#A98FF3';
+      var psychic = '#F95587';
+      var bug = '#A6B91A';
+      var rock = '#B6A136';
+      var ghost = '#735797';
+      var dragon = '#6F35FC';
       var dark = '#705848';
 
 

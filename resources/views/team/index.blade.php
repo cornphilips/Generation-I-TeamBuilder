@@ -2,9 +2,12 @@
 
 @extends('layouts.app')
 @section('content')
+<?php
+ $userid = Auth::user()->id;
+ ?>
   <div class="container">
     <a href="/team/create" class="btn btn-primary">Create Team</a>
-    
+
     <table class="table table-striped">
     <thead>
       <tr>
@@ -21,6 +24,7 @@
     </thead>
     <tbody>
       @foreach($teams as $id)
+      @if($id['user_id'] === $userid)
       <tr>
         <td>{{$id['id']}}</td>
         <td>{{$id['title']}}</td>
@@ -39,8 +43,25 @@
           </form>
         </td>
       </tr>
-      @endforeach
+      @endif
+    @endforeach
     </tbody>
   </table>
+
+<!--
+  <select class="form-control m-bot15" name="team_id">
+  @foreach($teams as $id)
+  @if($id['user_id'] === $userid)
+    <option value="{{$id['id']}}"> {{$id['title']}} </option>
+  @endif
+  @endforeach
+  </select>
+-->
+
+
+
+
+
+
   </div>
 @endsection
