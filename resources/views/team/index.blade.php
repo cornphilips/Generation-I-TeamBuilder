@@ -4,10 +4,11 @@
 @section('content')
   <div class="container">
     <a href="/team/create" class="btn btn-primary">Create Team</a>
-    
+
     <table class="table table-striped">
     <thead>
       <tr>
+
         <th>ID</th>
         <th>Title</th>
         <th>Pokemon1</th>

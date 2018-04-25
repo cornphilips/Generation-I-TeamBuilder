@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 use App\User;
+use App\Pokemon;
 use App\Quotation;
 
 class ListController extends Controller
@@ -64,7 +65,10 @@ class ListController extends Controller
 
     }
 
-    
+    public function search() {
+      $pokemon = Pokemon::all()->toArray();
+      return view('search', compact('pokemon'));
+    }
 
 
 }

@@ -31,8 +31,10 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
+
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <!-- {{ config('app.name', 'TeamBuilder') }} -->
+                    <img class="pokeball" src="">
                     TeamBuilder
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,9 +87,48 @@
 </body>
 
 <script>
+
 function firstLetterToUpper(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+jQuery(document).ready(function($) {
+
+  var array = [
+    "https://play.pokemonshowdown.com/sprites/itemicons/cherish-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/dive-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/dream-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/dusk-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/fast-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/friend-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/great-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/heal-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/heavy-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/level-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/light-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/love-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/lure-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/luxury-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/master-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/moon-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/nest-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/net-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/park-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/poke-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/premier-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/quick-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/repeat-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/safari-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/sport-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/timer-ball.png",
+    "https://play.pokemonshowdown.com/sprites/itemicons/ultra-ball.png"
+  ];
+
+  var index = Math.floor((Math.random() * 27));
+  $(".pokeball").attr("src", array[index]);
+
+});
+
 
 
 </script>

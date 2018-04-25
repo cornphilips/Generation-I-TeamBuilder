@@ -23,6 +23,8 @@ Route::post('/update/{id}', 'ListController@update');
 
 Route::resource('users', 'ListController@update');
 
+Route::get('search', 'ListController@search');
+
 //Route::get('/ui', function () {
 //    return view('testui');
 //});
