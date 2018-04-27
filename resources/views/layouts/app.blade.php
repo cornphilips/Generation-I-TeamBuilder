@@ -13,16 +13,19 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link class="favicon" rel="shortcut icon" type="image/x-icon" href="" />
 
 
 
@@ -32,7 +35,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
 
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/search') }}">
                     <!-- {{ config('app.name', 'TeamBuilder') }} -->
                     <img class="pokeball" src="">
                     TeamBuilder
@@ -59,15 +62,42 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+                                <?php
+                                 $userid = Auth::user()->id;
+                                 $teamid = DB::select("SELECT id FROM `teams` WHERE user_id = $userid");
+
+                                 #echo "<pre>";
+                                 #print_r($teamid);
+                                 #echo "</pre>";
+                                 ?>
+
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                  @if(isset($teamid[0]->id))
+                                  <a class="dropdown-item" href="/ui/{{ $teamid[0]->id }}">TeamBuilder</a>
+                                  @else
+                                  <form method="post" action="{{url('team')}}"> {{ csrf_field() }}
+                                    <button class="dropdown-item" type="submit">Create Team</button>
+                                    <input type="hidden" value="first team" name="title">
+                                    <input type="hidden" value="" name="pokemon1">
+                                    <input type="hidden" value="" name="pokemon2">
+                                    <input type="hidden" value="" name="pokemon3">
+                                    <input type="hidden" value="" name="pokemon4">
+                                    <input type="hidden" value="" name="pokemon5">
+                                    <input type="hidden" value="" name="pokemon6">
+                                  </form>
+                                  @endif
+                                  <a class="dropdown-item" href="/search">Pokedex</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @if(Auth::User()->isAdmin())
                                     <a class="dropdown-item" href="/team">Team CRUD</a>
                                     <a class="dropdown-item" href="/team/create">Create Team</a>
-                                    <a class="dropdown-item" href="/">Users CRUD</a>
+                                    <a class="dropdown-item" href="/show">Users CRUD</a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -80,11 +110,14 @@
             </div>
         </nav>
 
+
         <main class="py-4">
             @yield('content')
         </main>
     </div>
 </body>
+
+
 
 <script>
 
@@ -105,7 +138,6 @@ jQuery(document).ready(function($) {
     "https://play.pokemonshowdown.com/sprites/itemicons/heal-ball.png",
     "https://play.pokemonshowdown.com/sprites/itemicons/heavy-ball.png",
     "https://play.pokemonshowdown.com/sprites/itemicons/level-ball.png",
-    "https://play.pokemonshowdown.com/sprites/itemicons/light-ball.png",
     "https://play.pokemonshowdown.com/sprites/itemicons/love-ball.png",
     "https://play.pokemonshowdown.com/sprites/itemicons/lure-ball.png",
     "https://play.pokemonshowdown.com/sprites/itemicons/luxury-ball.png",
@@ -126,9 +158,9 @@ jQuery(document).ready(function($) {
 
   var index = Math.floor((Math.random() * 27));
   $(".pokeball").attr("src", array[index]);
+  $(".favicon").attr("href", array[index]);
 
 });
-
 
 
 </script>

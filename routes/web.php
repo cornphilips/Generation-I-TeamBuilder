@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'ListController@show');
+Route::get('/show', 'ListController@show');
 
 Auth::routes();
 
@@ -24,12 +24,16 @@ Route::post('/update/{id}', 'ListController@update');
 Route::resource('users', 'ListController@update');
 
 Route::get('search', 'ListController@search');
+Route::get('/', 'ListController@search');
+
+Route::post('/ui/{id}', 'TEAMController@addPokemon');
 
 //Route::get('/ui', function () {
 //    return view('testui');
 //});
 
 Route::get('/ui/{id}', 'TEAMController@getTeam');
+Route::get('/ui', 'TEAMController@getTeamNoTeam');
 
 //Noahs stuff
 

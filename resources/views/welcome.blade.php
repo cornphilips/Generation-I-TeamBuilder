@@ -16,7 +16,7 @@
                               <th>ID</th>
                               <th>Name</th>
                               <th>Email</th>
-                              <th>Password</th>
+
                               <th>created_at</th>
                               <th>admin</th>
                               <th></th>
@@ -27,7 +27,7 @@
                               <td>{{ $user->id }}</td>
                               <td>{{ $user->name }}</td>
                               <td>{{ $user->email }}</td>
-                              <td>{{ $user->password }}</td>
+
                               <td>{{ $user->created_at }}</td>
                               <td>{{ $user->admin }}</td>
                               <td><a href="/edit/{{$user->id}}"><button type="button" class="btn btn-primary">edit</button></a>

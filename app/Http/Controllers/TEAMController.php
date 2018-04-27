@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Team;
 use App\User;
+use App\Pokemon;
 
 class TEAMController extends Controller
 {
@@ -57,7 +58,7 @@ class TEAMController extends Controller
       ]);
 
       $team->save();
-      return redirect('/team');
+      return redirect('/');
     }
 
     /**
@@ -96,7 +97,7 @@ class TEAMController extends Controller
     {
       $team = Team::find($id);
 
-      $team->title = $request->get('title');
+      $team->title    = $request->get('title');
       $team->pokemon1 = $request->get('pokemon1');
       $team->pokemon2 = $request->get('pokemon2');
       $team->pokemon3 = $request->get('pokemon3');
@@ -129,13 +130,69 @@ class TEAMController extends Controller
       $team = Team::find($id);
       $team->delete();
 
-      return redirect('/team');
+      return redirect('/');
     }
 
     public function getTeam($id) {
       $team = Team::find($id);
       $teams = Team::all()->toArray();
-      return view('/testui', compact('team' , 'teams'));
+      $pokemon = Pokemon::all()->toArray();
+      return view('/testui', compact('team' , 'teams', 'pokemon'));
+    }
+
+
+    public function addPokemon(Request $request, $id) {
+      $team = Team::find($id);
+
+      $index = $request->get('pokemonIndex');
+      $action = $request->get('action');
+      $teams = Team::all()->toArray();
+      $pokemon = Pokemon::all()->toArray();
+      //$name = $request->get('pokemon');
+      if ($action == "delete") {
+        if ($index == "poke1") {
+          $team->pokemon1 = $request->get('pokemon');
+        }
+        if ($index == "poke2") {
+          $team->pokemon2 = $request->get('pokemon');
+        }
+        if ($index == "poke3") {
+          $team->pokemon3 = $request->get('pokemon');
+        }
+        if ($index == "poke4") {
+          $team->pokemon4 = $request->get('pokemon');
+        }
+        if ($index == "poke5") {
+          $team->pokemon5 = $request->get('pokemon');
+        }
+        if ($index == "poke6") {
+          $team->pokemon6 = $request->get('pokemon');
+        }
+      }
+      if ($action == "add") {
+        if ($index == "poke1") {
+          $team->pokemon1 = $request->get('pokemon');
+        }
+        if ($index == "poke2") {
+          $team->pokemon2 = $request->get('pokemon');
+        }
+        if ($index == "poke3") {
+          $team->pokemon3 = $request->get('pokemon');
+        }
+        if ($index == "poke4") {
+          $team->pokemon4 = $request->get('pokemon');
+        }
+        if ($index == "poke5") {
+          $team->pokemon5 = $request->get('pokemon');
+        }
+        if ($index == "poke6") {
+          $team->pokemon6 = $request->get('pokemon');
+        }
+      }
+
+
+      $team->save();
+      return view('/testui', compact('team', 'teams', 'pokemon'));
     }
 
 }

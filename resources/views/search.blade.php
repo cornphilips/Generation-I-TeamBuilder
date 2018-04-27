@@ -11,14 +11,15 @@
 
   <tr>
     <th></th>
-    <th>No.</th>
-    <th>Name</th>
-    <th>Type</th>
-    <th>HP</th>
-    <th>Attack</th>
-    <th>Defense</th>
-    <th>Special</th>
-    <th>Speed</th>
+    <th style="cursor:pointer" onclick="sortTableInts(1)">No.</th>
+    <th style="cursor:pointer" onclick="sortTable(2)">Name</th>
+    <th style="cursor:pointer" onclick="sortTable(3)">Type</th>
+    <th style="cursor:pointer" onclick="sortTableInts(4)">HP</th>
+    <th style="cursor:pointer" onclick="sortTableInts(5)">Attack</th>
+    <th style="cursor:pointer" onclick="sortTableInts(6)">Defense</th>
+    <th style="cursor:pointer" onclick="sortTableInts(7)">Sp. Attack</th>
+    <th style="cursor:pointer" onclick="sortTableInts(8)">Sp. Defense</th>
+    <th style="cursor:pointer" onclick="sortTableInts(9)">Speed</th>
   </tr>
 
   @foreach($pokemon as $p)
@@ -34,6 +35,7 @@
     <td>{{$p['attack']}}</td>
     <td>{{$p['defense']}}</td>
     <td>{{$p['spattack']}}</td>
+    <td>{{$p['spdefense']}}</td>
     <td>{{$p['speed']}}</td>
 @endforeach
 </div>
@@ -55,6 +57,7 @@ var rock = '#e2b17a';
 var ghost = '#c060db';
 var dragon = '#9d2ef2';
 var dark = '#705848';
+var steel= '#B7B7CE';
 
 jQuery(document).ready(function($) {
 
@@ -96,6 +99,115 @@ function search() {
         tr[i].style.display = "";
       } else {
         tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function sortTableInts(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("pokemon-table");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("pokemon-table");
+  switching = true;
+  //Set the sorting direction to ascending:
+  dir = "asc";
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.getElementsByTagName("TR");
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /*check if the two rows should switch place,
+      based on the direction, asc or desc:*/
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          //if so, mark as a switch and break the loop:
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      //Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /*If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again.*/
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
       }
     }
   }
